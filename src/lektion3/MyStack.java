@@ -1,8 +1,7 @@
 /*
 package lektion3;
-
-import javax.swing.plaf.IconUIResource;
 import java.util.Arrays;
+import java.util.EmptyStackException;
 
 public class MyStack<E> implements Stack<E>{
     private E[] data;
@@ -36,7 +35,7 @@ public class MyStack<E> implements Stack<E>{
     @Override
     public E peek() {
         if(this.empty()){
-            return null;
+            throw new EmptyStackException();
         }
         return data[size];
     }

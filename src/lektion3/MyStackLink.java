@@ -81,5 +81,7 @@ public class MyStackLink<E> implements Stack<E> {
         System.out.println(list.peek(1));
         System.out.println(list.peek(2));
         System.out.println(list.flush());
+        System.out.println(list.peek());
+        System.out.println(list.peek());
     }
 }
