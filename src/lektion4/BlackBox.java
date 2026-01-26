@@ -54,6 +54,7 @@ public class BlackBox<E> {
     private void reallocate() {
         E[] newData = (E[]) new Object[maxSize * 2];
         for (int i = 0; i < size; i++) {
+            System.out.println((rear+i) % maxSize+" "+rear);
             newData[i] = data[(front + i) % maxSize];
         }
         data = newData;
