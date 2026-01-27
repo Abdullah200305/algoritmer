@@ -1,6 +1,5 @@
 package Redovisning1;
 
-import java.util.EmptyStackException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
