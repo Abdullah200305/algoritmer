@@ -15,4 +15,8 @@ public class NB12 {
         }
         return res;
     };
+    public static void main(String[] args){
+        System.out.println(NB12.calculatePowerTo(4,3));
+        System.out.println(NB12.calculatePowerToIterativ(4,3));
+    }
 }

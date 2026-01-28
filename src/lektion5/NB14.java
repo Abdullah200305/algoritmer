@@ -1,5 +1,7 @@
 package lektion5;
 
+import java.util.Scanner;
+
 public class NB14 {
  /*   static public int cost(int points, int goal,int result){
         if(points==goal){
@@ -38,6 +40,13 @@ public class NB14 {
         if (tal1 == -1) return tal2;
         if (tal2 == -1) return tal1;
         return Math.min(tal1, tal2);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Vilken poäng ska uppnås: ");
+        int point = scanner.nextInt();
+        System.out.println("Poängen kan nås med "+NB14.cost( 1, point) +" kronor");
     }
 
 

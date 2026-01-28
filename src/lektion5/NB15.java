@@ -17,4 +17,9 @@ public class NB15 {
         }
         return run(text, postion+1, res);
     }
+
+    public static void main(String[] args) {
+        System.out.println(NB15.run("1011"));
+
+    }
 }

@@ -25,4 +25,13 @@ public class NB11 {
         return findBiggerTal(list,target,min,mid-1);
 
     }
+
+    public static void main(String[] args) {
+      int[]list = new int[10];
+        for (int i = 0; i < list.length; i++) {
+            list[i]=i;
+        }
+        System.out.println(NB11.findBiggerTal(list,35,0));
+        System.out.println(NB11.findBiggerTal(list,36,0,list.length-1));
+        }
 }

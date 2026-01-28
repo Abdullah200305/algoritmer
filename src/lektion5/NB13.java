@@ -7,4 +7,9 @@ public class NB13 {
         }
         return Rot(n,(((a*a)+n)/(2*a)),e);
     }
+
+    public static void main(String[] args) {
+
+            System.out.println(NB13.Rot(9,1,0.0005));
+    }
 }
