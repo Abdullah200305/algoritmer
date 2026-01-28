@@ -1,60 +1,48 @@
+import Redovisning1.SingleLinkedList;
+import Redovisning1.Uppgift3;
 import lektion5.*;
 
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.Iterator;
 
-public class Main {
+
+public class Main{
     public static void main(String[] args) {
-        System.out.println(NB13.Rot(9,1,0.0005));
-     /*  int[]list = new int[10];
-        for (int i = 0; i < list.length; i++) {
-            list[i]=i;
+    /*    SingleLinkedList<Integer> listone = new SingleLinkedList<>();
+
+        listone.add(1);
+        listone.add(2);
+        listone.add(3);
+        listone.add(0,12);
+
+        System.out.println(listone.remove(0));
+        System.out.println(listone.remove(1));
+        System.out.println(listone.remove(1));
+        System.out.println(listone.remove(0));
+        System.out.println("Size: " + listone.get(3)+" "+listone.toString());
+*/
+
+
+        Uppgift3<Integer> list = new Uppgift3<>();
+        list.add(1);
+        list.add(999,0);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+
+        Iterator<Integer> it = list.iterator();
+        while (it.hasNext()){
+            int data = it.next();
+            if(data%3==0){
+                it.remove();
+            }
+            System.out.println(data);
         }
-        System.out.println(NB11.findBiggerTal(list,35,0));
-        System.out.println(NB11.findBiggerTal(list,36,0,list.length-1));
-       *//* System.out.println(fib(2,3));*/
+
+        System.out.println(list.toString());
 
 
-       /* System.out.println(NB12.calculatePowerTo(4,3));
-        System.out.println(NB12.calculatePowerToIterativ(4,3));
-*/
-/*
-
-        System.out.println(NB13.Rot(9,1,0.0005));
-*/
-
-
-     /*   Scanner scanner = new Scanner(System.in);
-        System.out.print("Vilken poäng ska uppnås: ");
-        int point = scanner.nextInt();
-        System.out.println(NB14.cost( 1, point,0));*/
-/*
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Vilken poäng ska uppnås: ");
-        int point = scanner.nextInt();
-        System.out.println("Poängen kan nås med "+NB14.cost( 1, point) +" kronor");
-*/
-
-
-        System.out.println(NB15.run("1011"));
 
     }
-    static int fib(int first,int sec) {
-      if(sec==0 && first==0){
-          return 1;
-      }
-      int antal =0;
-      if(first>0){
-          antal = fib(first-1,sec);
-      }
-      if(sec>0){
-          antal += fib(first,sec-1);
-        }
-      return antal;
-    }
-
 
 }
 

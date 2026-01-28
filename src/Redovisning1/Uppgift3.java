@@ -1,47 +1,45 @@
+
 package Redovisning1;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class Uppgift3<E> {
-    private Node head;
+    private Node<E> head;
     private int size;
-    private class Node<E>{
-        private E data;
-        private Node next;
-        public Node(E data,Node next){
+
+    private static class Node<E> {
+        E data;
+        Node<E> next;
+
+        Node(E data, Node<E> next) {
             this.data = data;
             this.next = next;
         }
     }
-    private class Ite implements Iterator<E>{
-        Node<E> current;
-        Node<E> lastReturned;
-        Node<E> prev;
-        public Ite(Node<E> start){
-            current = start;
-        }
-        @Override
+
+    private class Ite implements Iterator<E> {
+        Node<E> current = head;
+        Node<E> lastReturned = null;
+        Node<E> prev = null;
+
         public boolean hasNext() {
-            return current!=null;
+            return current != null;
         }
 
-        @Override
         public E next() {
-            if (current == null) {
+            if (!hasNext())
                 throw new NoSuchElementException();
-            }
+
             prev = lastReturned;
             lastReturned = current;
             current = current.next;
             return lastReturned.data;
         }
 
-        @Override
         public void remove() {
-            if (lastReturned == null) {
-                throw new IllegalStateException("next() not called or already removed");
-            }
+            if (lastReturned == null)
+                throw new IllegalStateException("remove() utan next()");
 
             if (prev == null) {
                 head = current;
@@ -53,89 +51,85 @@ public class Uppgift3<E> {
         }
     }
 
-
-
-    public Uppgift3(){
+    public Uppgift3() {
         head = null;
         size = 0;
     }
 
-    public Iterator<E> iterator(){
-        return new Ite(head);
+    public Iterator<E> iterator() {
+        return new Ite();
     }
-    public boolean Add(E item,int index){
-        if(head==null){
-            AddFirst(item);
-        }
-        else{
-          AddAfter(index,item);
-        }
-        return true;
-    }
-    public boolean Add(E item){
-        if(head==null){
-            AddFirst(item);
-        }
-        else{
-           Node<E> node = getNode(size-1);
-           node.next = new Node<>(item,null);
+
+    public boolean add(E item) {
+        if (head == null) {
+            head = new Node<>(item, head);
+        } else {
+            Node<E> n = getNode(size - 1);
+            n.next = new Node<>(item, null);
         }
         size++;
         return true;
     }
-    private boolean AddFirst(E item){
-        head = new Node<>(item,null);
-        return true;
-    }
-    private boolean AddAfter(int index,E item){
-        if(index==0){
-            head = new Node<>(item,head);
-        }
-        else {
-            Node prev = getNode(index-1);
+
+    public boolean add(E item, int index) {
+        if (index < 0 || index > size)
+            throw new IndexOutOfBoundsException();
+
+        if (index == 0) {
+            head = new Node<>(item, head);
+        } else {
+            Node<E> prev = getNode(index - 1);
             prev.next = new Node<>(item, prev.next);
         }
+        size++;
         return true;
     }
 
-
-    private Node<E>getNode(int index){
-        if (index < 0 || index >= size) {
+    private Node<E> getNode(int index) {
+        if (index < 0 || index >= size)
             throw new IndexOutOfBoundsException(index);
-        }
 
-        Node<E> current = head;
+        Node<E> cur = head;
         for (int i = 0; i < index; i++) {
-            current = current.next;
+            cur = cur.next;
         }
-        return current;
+        return cur;
     }
-
-
-
-
-
-
 
     public int size() {
         return size;
     }
 
-
-
-    @Override
-    public String toString(){
-        StringBuilder str = new StringBuilder();
-        if(size==0){
-            str.append("[]");
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[");
+        Iterator<E> it = iterator();
+        while (it.hasNext()) {
+            sb.append(it.next());
+            if (it.hasNext()) sb.append(" => ");
         }
-        Iterator<E> ite = this.iterator();
-        while (ite.hasNext()){
-            str.append(ite.next()+" ");
-            if(ite.hasNext()){
-                str.append("=> ");
-            }
-        }
-        return str.toString();
+        sb.append("]");
+        return sb.toString();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
