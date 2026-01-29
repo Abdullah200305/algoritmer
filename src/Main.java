@@ -1,44 +1,31 @@
-import Redovisning1.SingleLinkedList;
-import Redovisning1.Uppgift3;
-import lektion5.*;
 
-import java.util.Iterator;
+
+import lektion6.Maze;
+
+import java.util.ArrayList;
 
 
 public class Main{
     public static void main(String[] args) {
-    /*    SingleLinkedList<Integer> listone = new SingleLinkedList<>();
 
-        listone.add(1);
-        listone.add(2);
-        listone.add(3);
-        listone.add(0,12);
+      /*  Maze m = new Maze();
+        m.print();
+        if(m.solve()) System.out.println("Lyckades");
+        System.out.println();
+        m.print();*/
 
-        System.out.println(listone.remove(0));
-        System.out.println(listone.remove(1));
-        System.out.println(listone.remove(1));
-        System.out.println(listone.remove(0));
-        System.out.println("Size: " + listone.get(3)+" "+listone.toString());
+
+
+       /* NB17<Integer> list = new NB17<>();
+        list.add(10);
+        list.add(20);
+        list.add(1,340);
+        System.out.println(list.toString());*/
+/*
+
+        System.out.println(BollsBox.AntalExchang(2,1,0,0));
+        System.out.println(BollsBoxBredd.AntalExchang(2,1,3,0));
 */
-
-
-        Uppgift3<Integer> list = new Uppgift3<>();
-        list.add(1);
-        list.add(999,0);
-        list.add(2);
-        list.add(3);
-        list.add(4);
-
-        Iterator<Integer> it = list.iterator();
-        while (it.hasNext()){
-            int data = it.next();
-            if(data%3==0){
-                it.remove();
-            }
-            System.out.println(data);
-        }
-
-        System.out.println(list.toString());
 
 
 
