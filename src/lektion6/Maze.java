@@ -72,31 +72,26 @@ public class Maze {
         }
 
 
-        if (mazeMatrix[p.row][p.column] == Cell.OPEN) {
-
-            mazeMatrix[p.row][p.column] = Cell.VISITED;
-
-
-            int[] DirectionRow = {-1, 1, 0, 0};
-            int[] DirectionCol = {0, 0, -1, 1};
-
+        if (mazeMatrix[p.row][p.column] == Cell.OPEN){
+            int DirCol[] = {0,0,1,-1};
+            int DirRow[] = {-1,1,0,0};
+            mazeMatrix[p.row][p.column]=Cell.VISITED;
             for (int i = 0; i < 4; i++) {
-                int newRow = p.row + DirectionRow[i];
-                int newCol = p.column + DirectionCol[i];
-
-
-                if (newRow >= 0 && newRow < mazeMatrix.length &&
-                        newCol >= 0 && newCol < mazeMatrix[0].length) {
-
-                    if (solve(new Position(newRow, newCol))) {
-                        mazeMatrix[p.row][p.column] = Cell.CORRECT;
-                        return true;
-                    }
+                int newRow = p.row+DirRow[i];
+                int newCol = p.column+DirCol[i];
+                if(solve(new Position(newRow,newCol))){
+                    mazeMatrix[p.row][p.column]=Cell.CORRECT;
+                    return true;
                 }
             }
         }
+        if(mazeMatrix[p.row][p.column]==Cell.VISITED){
+            mazeMatrix[p.row][p.column]=Cell.OPEN;
+        }
+
         return false;
     }
+
 
 
 
@@ -120,7 +115,9 @@ public class Maze {
         Maze m = new Maze();
         m.print();
         if(m.solve()) System.out.println("Lyckades");
-        System.out.println();
+
         m.print();
+        System.out.println();
+
     }
 }
