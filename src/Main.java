@@ -1,14 +1,16 @@
-import Redovisning2.Flygplats;
-import lektion7.NB22_1;
-import lektion7.NB23;
-import lektion7.NBNB23_1;
-import test.BackTrack;
 
+import lektion8.NB26_3;
 
 public class Main{
     public static void main(String[] args) {
-        Flygplats flygplats = new Flygplats();
-        flygplats.run();
+        NB26_3<String,Integer>hashTabel = new NB26_3<>(1);
+        hashTabel.put("cow",10);
+        hashTabel.put("run",10);
+        hashTabel.put("dow",10);
+        System.out.println(hashTabel.toString());
+        hashTabel.remove("dow");
+        System.out.println(hashTabel.toString());
+
     }
 
 }

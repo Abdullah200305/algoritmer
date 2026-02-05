@@ -1,5 +1,8 @@
 package lektion7;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+
 public class NBNB23_1<E extends Comparable<E>> {
     private class Node<E>{
         private E data;
@@ -72,6 +75,44 @@ public class NBNB23_1<E extends Comparable<E>> {
     }
 
 
+
+
+    private class State{
+        private Node<E> pos;
+        public State(Node<E> pos) {
+            this.pos = pos;
+        }
+    }
+    public E maxIt(){
+        return maxIt(root);
+    }
+    private E maxIt(Node<E> node){
+        if (node == null) return null;
+
+        Queue<Node<E>> queue = new ArrayDeque<>();
+        queue.offer(node);
+
+        E max = null;
+
+        while (!queue.isEmpty()) {
+            Node<E> current = queue.poll();
+
+            if (current.data != null) {
+                if (max == null || current.data.compareTo(max) > 0) {
+                    max = current.data;
+                }
+            }
+            if (current.left != null) {
+                queue.offer(current.left);
+            }
+            if (current.right != null) {
+                queue.offer(current.right);
+            }
+        }
+        return max;
+    }
+
+
     public static void main(String[] args) {
         NBNB23_1<Character> tree = new NBNB23_1<>();
         tree.add('H');
@@ -82,7 +123,7 @@ public class NBNB23_1<E extends Comparable<E>> {
         tree.add('C');
         tree.add('F');
         tree.add('D');
-        System.out.println(tree.maxRec());
+        System.out.println(tree.maxIt());
     }
 
 }

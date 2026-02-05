@@ -1,7 +1,6 @@
 package lektion7;
 
 
-import lektion6.BollsBoxBredd;
 
 import java.util.ArrayDeque;
 import java.util.Queue;

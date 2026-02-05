@@ -1,156 +1,86 @@
-/*
 package Redovisning2;
 
-
-
-import java.util.*;
-
-public class Flygplats {
-    final int TIDSSTEG = 5;
-    final int LANDNINGSTID = 20;
-    final int STARTTID = 20;
-    final double LANDNINGSCHANS = 0.05;
-    final double STARTCHANS = 0.05;
-    final int STEG_PER_AAR = (365 * 24 * 60) / TIDSSTEG;
-    final int SIMULERINGSTEG = 10 * STEG_PER_AAR;
-
-    private int bananTid = 0;  // om bana ledigt
-    String paGangTyp = null; // "landning" eller "start"
-
-    private Queue<Integer> StartQueue;
-    private Queue<Integer> landQueue;
-
-    List<Integer> landningVantetid = new ArrayList<>();
-    List<Integer> startVantetid = new ArrayList<>();
-
-    public Flygplats() {
-        StartQueue= new LinkedList<>();
-        landQueue= new LinkedList<>();
-    }
-    public void  run(){
-        Random rand = new Random();
-        for (int i = 0; i < SIMULERINGSTEG; i++) {
-            int nuvarandeTid = i * TIDSSTEG;
-            if(rand.nextDouble()<LANDNINGSTID){
-                landQueue.offer(nuvarandeTid);
-            }
-
-            if(rand.nextDouble()<STARTTID){
-                StartQueue.offer(nuvarandeTid);
-            }
-            if(bananTid==0){
-                if(!landQueue.isEmpty()){
-                    int ankomstTid = landQueue.poll();
-                    landningVantetid.add(nuvarandeTid - ankomstTid);
-                    bananTid = LANDNINGSTID;
-                    paGangTyp = "landning";
-                } else if (!StartQueue.isEmpty()) {
-                    int ankomstTid = StartQueue.poll();
-                    startVantetid.add(nuvarandeTid - ankomstTid);
-                    bananTid = STARTTID;
-                    paGangTyp = "start";
-                }
-            }
-            if (bananTid > 0) {
-                bananTid -= TIDSSTEG;
-                if (bananTid < 0) bananTid = 0;
-            }
-        }
-        // Statistik
-        double medelLandning = landningVantetid.stream().mapToInt(Integer::intValue).average().orElse(0.0);
-        double medelStart = startVantetid.stream().mapToInt(Integer::intValue).average().orElse(0.0);
-
-        System.out.println("Medelväntetid landning: " + medelLandning + " min");
-        System.out.println("Medelväntetid start: " + medelStart + " min");
-    }
-}
-*/
-
-
-
-package Redovisning2;
-
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Random;
 
 public class Flygplats {
-    // Parametrar
-    final int TIDSSTEG = 5;       // minuter per steg
-    final int LANDNINGSTID = 20;  // tid för en landning
-    final int STARTTID = 20;      // tid för en start
-    final double LANDNINGSCHANS = 0.05; // 5% chans per steg
-    final double STARTCHANS = 0.05;     // 5% chans per steg
-
-    final int STEG_PER_AAR = (365 * 24 * 60) / TIDSSTEG;
-    final int SIMULERINGSTEG = 10 * STEG_PER_AAR; // 10 år
-
-    private int bananTid = 0;      // tid kvar tills banan är ledig
-    private String paGangTyp = null; // "landning" eller "start"
-
-    private Queue<Integer> landQueue;
+    final private int tidssteg=5;
+    final private int landningsTid=20;
+    final private int startsTid=20;
+    final private double AtStart_landad=0.05;
+    final private int Year = (365*24*60);
+    private Queue<Integer> landningQueue;
     private Queue<Integer> startQueue;
+    private int landningsbana;  // kommer säga om den är ledig t eller inte
+    private int simulering;
 
-    private List<Integer> landningVantetid;
-    private List<Integer> startVantetid;
-
-    public Flygplats() {
-        landQueue = new LinkedList<>();
+    public Flygplats(int years) {
+        landningsbana = 0;
+        simulering = (years * Year) / tidssteg;
+        landningQueue = new LinkedList<>();
         startQueue = new LinkedList<>();
-        landningVantetid = new ArrayList<>();
-        startVantetid = new ArrayList<>();
     }
+    public void run(){
+        Random random = new Random();
+        int medvalue_landed = 0;
+        int antal_landed = 0;
+        int medvalue_start = 0;
+        int antal_start = 0;
 
-    public void run() {
-        Random rand = new Random();
 
-        for (int steg = 0; steg < SIMULERINGSTEG; steg++) {
-            int nuvarandeTid = steg * TIDSSTEG;
+        int maxLand =0;
+        int maxStart =0;
 
-            // Nya plan dyker upp
-            if (rand.nextDouble() < LANDNINGSCHANS) {
-                landQueue.offer(nuvarandeTid);
+        for (int i = 0; i < simulering; i++) {
+            int nuvarandeTid = i * tidssteg;
+
+            if (random.nextDouble() < AtStart_landad) { // för land
+                landningQueue.offer(nuvarandeTid);
             }
-            if (rand.nextDouble() < STARTCHANS) {
+            if (random.nextDouble() < AtStart_landad) { // för start
                 startQueue.offer(nuvarandeTid);
             }
 
-            // Banan ledig?
-            if (bananTid == 0) {
-                if (!landQueue.isEmpty()) {
-                    int ankomstTid = landQueue.poll();
-                    landningVantetid.add(nuvarandeTid - ankomstTid);
-                    bananTid = LANDNINGSTID;
-                    paGangTyp = "landning";
+            if(landningsbana==0){
+                if(!landningQueue.isEmpty()){
+                   landningsbana=landningsTid;
+                    int ankomstTid = landningQueue.poll();
+                    int vantetid = nuvarandeTid - ankomstTid;
+                   medvalue_landed+=  (vantetid);
+                   antal_landed++;
+                    if (vantetid > maxLand) maxLand = vantetid;
                 } else if (!startQueue.isEmpty()) {
+                    landningsbana=startsTid;
                     int ankomstTid = startQueue.poll();
-                    startVantetid.add(nuvarandeTid - ankomstTid);
-                    bananTid = STARTTID;
-                    paGangTyp = "start";
+                    int vantetid = nuvarandeTid - ankomstTid;
+                    medvalue_start+=  (vantetid);
+                    antal_start++;
+                    if(vantetid > maxStart)maxStart = vantetid;
                 }
-            }
 
-            // Minska pågående operation
-            if (bananTid > 0) {
-                bananTid -= TIDSSTEG;
-                if (bananTid < 0) bananTid = 0;
+            }
+            if(landningsbana>0){
+                landningsbana-=tidssteg;
+                if(landningsbana<0)landningsbana=0;
             }
         }
-
-        // Statistik
-        double medelLandning = landningVantetid.stream().mapToInt(Integer::intValue).average().orElse(0.0);
-        double medelStart = startVantetid.stream().mapToInt(Integer::intValue).average().orElse(0.0);
-
-        int maxLandning = landningVantetid.stream().mapToInt(Integer::intValue).max().orElse(0);
-        int maxStart = startVantetid.stream().mapToInt(Integer::intValue).max().orElse(0);
-
-        System.out.println("Medelväntetid landning: " +String.format("%.1f", medelLandning)  + " min");
-        System.out.println("Medelväntetid start: " + String.format("%.2f", medelStart) + " min");
-        System.out.println("Maximal väntetid landning: " + maxLandning + " min");
-        System.out.println("Maximal väntetid start: " + maxStart + " min");
+        System.out.println("Typisk medelväntetid för landning: "
+                +String.format("%.1f", (double) medvalue_landed /antal_landed)
+                +" min och för start "
+                +String.format("%.1f", (double) medvalue_start / antal_start)
+                +" min.");
+        System.out.println("Max landning: " + maxLand+" Max start: "+maxStart);
     }
 
-    public static void main(String[] args) {
-        Flygplats flygplats = new Flygplats();
-        flygplats.run();
+
+    public class Main{
+        public static void main(String[] args) {
+            Flygplats flygplats = new Flygplats(10);
+            flygplats.run();
+        }
+
     }
+
+
 }
-
