@@ -1,14 +1,15 @@
-import Redovisning2.Uppgift5Bredd;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import lektion8.NB26_3;
 
 public class Main{
     public static void main(String[] args) {
+        NB26_3<String,Integer>hashTabel = new NB26_3<>(1);
+        hashTabel.put("cow",10);
+        hashTabel.put("run",10);
+        hashTabel.put("dow",10);
+        System.out.println(hashTabel.toString());
+        hashTabel.remove("dow");
+        System.out.println(hashTabel.toString());
 
-        ArrayList<Character> test = new ArrayList<>(Arrays.asList('B','E','C','A','D'));
-
-        System.out.println(Uppgift5Bredd.SolveBox(test));
     }
 
 }
