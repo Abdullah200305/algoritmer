@@ -9,32 +9,32 @@ public class Uppgift5 {
 
     static public String bokstavsordning(ArrayList<Character> list){
         ArrayList<Character> res = new ArrayList<>(Arrays.asList('A','B','C','D','E'));
-        StringBuilder text = new StringBuilder();
+        StringBuilder path = new StringBuilder();
 
-        Result result = bokstavsordning(list,res,text,0);
+        Result result = bokstavsordning(list,res,path,0);
         StringBuilder str = new StringBuilder();
-        str.append(list.toString()+" tar minst "+result.number+" steg och en lösning är: "+result.text+".");
+        str.append(list.toString()+" tar minst "+result.number+" steg och en lösning är: "+result.path+".");
         return  str.toString();
     }
 
     static private class Result{
-        private String text;
+        private String path;
         private int number;
 
-        public Result(int number,String text) {
+        public Result(int number,String path) {
             this.number = number;
-            this.text = text;
+            this.path = path;
         }
     }
-    static public Result bokstavsordning(ArrayList<Character> list,ArrayList<Character>test,StringBuilder text,int antal){
+    static public Result bokstavsordning(ArrayList<Character> list,ArrayList<Character>test,StringBuilder path,int antal){
         if(list.equals(test)){
-            return new Result(antal,text.toString());
+            return new Result(antal,path.toString());
         }
         if(antal==15){
             return new Result(Integer.MAX_VALUE,"-1");
         }
-        Result one = b(list,test,antal,text);
-        Result two = s(list,test,antal,text);
+        Result one = b(list,test,antal,path);
+        Result two = s(list,test,antal,path);
 
 
         return (one.number < two.number) ? one : two;
@@ -44,21 +44,21 @@ public class Uppgift5 {
     static private Result b( ArrayList<Character> list,
                           ArrayList<Character>test,
                           int antal,
-                          StringBuilder text){
+                          StringBuilder path){
         ArrayList<Character> ny = new ArrayList<>(list);
         char temp = ny.get(1);
         ny.set(1,ny.get(0));
         ny.set(0,temp);
-        return bokstavsordning(ny,test,new StringBuilder(text).append("b"),antal+1);
+        return bokstavsordning(ny,test,new StringBuilder(path).append("b"),antal+1);
     }
     static private Result s( ArrayList<Character> list,
                           ArrayList<Character>test,
                           int antal,
-                          StringBuilder text){
+                          StringBuilder path){
         ArrayList<Character> ny = new ArrayList<>(list);
         char temp = ny.remove(ny.size()-1);
         ny.add(0,temp);
-        return bokstavsordning(ny,test,new StringBuilder(text).append("s"),antal+1);
+        return bokstavsordning(ny,test,new StringBuilder(path).append("s"),antal+1);
     }
 
 

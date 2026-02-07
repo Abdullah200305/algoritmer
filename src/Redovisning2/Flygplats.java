@@ -73,14 +73,8 @@ public class Flygplats {
         System.out.println("Max landning: " + maxLand+" Max start: "+maxStart);
     }
 
-
-    public class Main{
         public static void main(String[] args) {
             Flygplats flygplats = new Flygplats(10);
             flygplats.run();
         }
-
-    }
-
-
 }
