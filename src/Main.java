@@ -1,16 +1,14 @@
-
-import lektion8.NB26_3;
+import test.SelectionList;
 
 public class Main{
     public static void main(String[] args) {
-        NB26_3<String,Integer>hashTabel = new NB26_3<>(1);
-        hashTabel.put("cow",10);
-        hashTabel.put("run",10);
-        hashTabel.put("dow",10);
-        System.out.println(hashTabel.toString());
-        hashTabel.remove("dow");
-        System.out.println(hashTabel.toString());
-
+        int[] list = {2,4,5,2,1};
+        SelectionList.solve(list);
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < list.length; i++) {
+            str.append(list[i]+" ");
+        }
+        System.out.println(str.toString());
     }
 
 }
