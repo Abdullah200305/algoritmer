@@ -1,0 +1,60 @@
+Audi A4
+2020
+22000
+Audi Q7
+2021
+12000
+BMW 3 Series
+2021
+15000
+BMW X5
+2019
+32000
+Ford Focus
+2019
+28000
+Ford Mustang
+2021
+9000
+Hyundai Tucson
+2019
+30000
+Kia Sportage
+2020
+17000
+Mercedes-Benz C-Class
+2018
+40000
+Mercedes-Benz GLC
+2020
+18000
+Peugeot 3008
+2021
+11000
+Skoda Octavia
+2018
+42000
+Tesla Model 3
+2022
+6000
+Tesla Model Y
+2022
+5000
+Toyota Corolla
+2020
+20000
+Toyota RAV4
+2022
+8000
+Volkswagen Golf
+2018
+45000
+Volkswagen Passat
+2017
+60000
+Volvo V90
+2019
+35000
+Volvo XC60
+2021
+12000
