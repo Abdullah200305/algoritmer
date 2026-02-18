@@ -1,13 +1,11 @@
-import test.MST;
-import test.Prim;
+import Redovisning3.Uppgift8;
+import Redovisning3.Uppgift9;
 
 public class Main{
     public static void main(String[] args) {
+        Uppgift9 list = new Uppgift9();
+        System.out.println(list.RadixSort(null));
 
-       /* MST mst = new MST();
-        mst.LowerCost();*/
-        Prim prim = new Prim();
-        prim.solve();
     }
 
 }

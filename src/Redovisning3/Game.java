@@ -24,6 +24,7 @@ public class Game {
             }
         }
         map[postionRow-1][postionCol-1]=1;
+        System.out.println(this.toString());
     }
 
 
@@ -35,7 +36,7 @@ public class Game {
     private void AntalSolveTime(int antal){
         if(antal==8){
             solutions++;
-
+            System.out.println(this.toString());
             return;
         }
         int pos[] = findEmpty();
@@ -102,5 +103,12 @@ public class Game {
             show.append("\n");
         }
         return show.toString();
+    }
+
+
+    public static void main(String[] args) {
+    Game game = new Game();
+    game.mapFill(1,3);
+    System.out.println(game.FillRun());
     }
 }
