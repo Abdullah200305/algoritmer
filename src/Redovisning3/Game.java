@@ -1,12 +1,10 @@
 package Redovisning3;
 
-
 public class Game {
     private final int row = 5;
     private final int col = 5;
     private int[][] map =  new int[row][col];
     int solutions = 0;
-
     int[][][] shapes = {
             { {0,0}, {1,0}, {0,1} },
             { {0,0}, {0,1}, {1,1} },
@@ -23,11 +21,9 @@ public class Game {
                 map[i][j]= 0;
             }
         }
-        map[postionRow-1][postionCol-1]=1;
+        map[postionRow-1][postionCol-1]=-1;
         System.out.println(this.toString());
     }
-
-
 
     public int FillRun(){
         AntalSolveTime(0);
@@ -43,7 +39,7 @@ public class Game {
         if(pos==null)return;
         for (int i = 0; i < 4; i++) {
              if(CanPlace(pos,shapes[i])){
-                palce(pos,shapes[i]);
+                palce(pos,shapes[i],i);
                 AntalSolveTime(antal+1);
                 remove(pos,shapes[i]);
              }
@@ -59,12 +55,12 @@ public class Game {
             map[ny][nx] = 0;
         }
     }
-    private void palce(int[] pos, int[][] shape){
+    private void palce(int[] pos, int[][] shape,int sh){
 
         for (int i = 0; i < shape.length; i++) {
             int nx = pos[1] + shape[i][0];
             int ny = pos[0] + shape[i][1];
-            map[ny][nx] = 1;
+            map[ny][nx] = (sh+1);
         }
     }
 
@@ -109,6 +105,10 @@ public class Game {
     public static void main(String[] args) {
     Game game = new Game();
     game.mapFill(1,3);
-    System.out.println(game.FillRun());
+    int total = game.FillRun();
+    System.out.println("Totala lösningar: " + total);
+
     }
 }
+
+
