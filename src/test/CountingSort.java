@@ -3,7 +3,7 @@ package test;
 import java.util.Arrays;
 
 public class CountingSort {
-    static public void sort(int[]v){
+    static public int[] sort(int[]v){
         int[] count = new int[Arrays.stream(v).parallel().max().getAsInt()+1];
         int[]output=new int[v.length];
         StringBuilder str = new StringBuilder();
@@ -29,5 +29,6 @@ public class CountingSort {
         System.out.println(str.toString());
         System.out.println(st.toString());
         System.out.println(s.toString());
+        return output;
     }
 }
