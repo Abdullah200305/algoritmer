@@ -1,9 +1,15 @@
 package Redovisning3;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Game {
     private final int row = 5;
     private final int col = 5;
     private int[][] map =  new int[row][col];
+    private int[] count = new int[4];
+
+
     int solutions = 0;
     int[][][] shapes = {
             { {0,0}, {1,0}, {0,1} },
@@ -31,6 +37,11 @@ public class Game {
     }
     private void AntalSolveTime(int antal){
         if(antal==8){
+            for (int i = 0; i < 4; i++) {
+                if(count[i]==0){
+                    return;
+                }
+            }
             solutions++;
             System.out.println(this.toString());
             return;
@@ -39,8 +50,10 @@ public class Game {
         if(pos==null)return;
         for (int i = 0; i < 4; i++) {
              if(CanPlace(pos,shapes[i])){
+                 count[i]++;
                 palce(pos,shapes[i],i);
                 AntalSolveTime(antal+1);
+                count[i]--;
                 remove(pos,shapes[i]);
              }
             }
@@ -50,24 +63,24 @@ public class Game {
 
     private void remove(int[] pos, int[][] shape){
         for (int i = 0; i < shape.length; i++) {
-            int nx = pos[1] + shape[i][0];
-            int ny = pos[0] + shape[i][1];
+            int nx = pos[1] + shape[i][1];
+            int ny = pos[0] + shape[i][0];
             map[ny][nx] = 0;
         }
     }
     private void palce(int[] pos, int[][] shape,int sh){
 
         for (int i = 0; i < shape.length; i++) {
-            int nx = pos[1] + shape[i][0];
-            int ny = pos[0] + shape[i][1];
+            int nx = pos[1] + shape[i][1];
+            int ny = pos[0] + shape[i][0];
             map[ny][nx] = (sh+1);
         }
     }
 
     private boolean CanPlace(int[] pos, int[][] shape){
         for (int i = 0; i < shape.length; i++) {
-            int nx = pos[1] + shape[i][0];
-            int ny = pos[0] + shape[i][1];
+            int nx = pos[1] + shape[i][1];
+            int ny = pos[0] + shape[i][0];
 
             if (nx < 0 || nx >= col || ny < 0 || ny >= row) return false;
             if (map[ny][nx] != 0) return false;

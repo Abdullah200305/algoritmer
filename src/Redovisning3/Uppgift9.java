@@ -53,11 +53,18 @@ public class Uppgift9 {
     }
     public static void main(String[] args) {
         Random random = new Random();
-        int[] list = new int[1000000];
+        int[] list = new int[10000];
         for (int i = 0; i < list.length; i++) {
             list[i]= random.nextInt(10000);
         }
+
+        long start = System.nanoTime();
         Uppgift9 run = new Uppgift9();
         run.RadixSort(list);
+        long end = System.nanoTime();
+
+        long time = end - start;
+        double ms = time / 1_000_000.0;
+        System.out.println("Tid: " + ms + " ms");
     }
 }
