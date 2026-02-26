@@ -70,10 +70,7 @@ public class Uppgift8 <E extends Comparable<E>> {
         return  str.toString();
     }
     private void Inorder(Node node,StringBuilder str){
-        if(node==null){
-            return;
-        }
-        else {
+        if(node!=null){
             Inorder(node.left,str);
             str.append(node.value+" ");
             Inorder(node.right,str);

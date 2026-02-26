@@ -29,8 +29,8 @@ public class BackTrackingTest{
         return 0;
     }*/
 
-    private int n =4;
-    private int[][] map = new int[4][4];
+    private int n =8;
+    private int[][] map = new int[n][n];
     private ArrayList<Integer> res = new ArrayList<>();
     public BackTrackingTest() {
         for (int i = 0; i < n; i++) {
@@ -57,7 +57,7 @@ public class BackTrackingTest{
             System.out.println(printMap());
             return 1;
         }int a=0;
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < n; i++) {
                 if(check(x,i)){
                     add(x,i);
                     a+=solve(x+1,antal+1);

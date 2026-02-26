@@ -83,7 +83,6 @@ public class MyTree <E extends Comparable<E>> {
                 return node;
             }else {
                 deleteItem = node.data;
-
                  if(node.left== null){
                     return node.right;
                 }
@@ -91,21 +90,9 @@ public class MyTree <E extends Comparable<E>> {
                     return node.left;
                 }
                 else {
-                   /*  Node<E> successor = node.right;
-                     while(successor.left != null){
-                         successor = successor.left;
-                     }
-
-                     node.data = successor.data;
-                     node.right = remove(successor.data, node.right);
-                     return node;
-*/
-
-
                     Node<E> moveTo = node.right, parenent = node;
                     if(moveTo.left == null){
                         moveTo.left = node.left;
-                        node.data = moveTo.data;
                         return moveTo;
                     }
 
