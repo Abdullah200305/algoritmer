@@ -71,7 +71,7 @@ public class ArrayQueue<E>{
 
     public static void main(String[] args) {
         ArrayQueue<Integer> list = new ArrayQueue<>(12);
-        list.offer(10);
+      /*  list.offer(10);
         list.offer(10);
         list.offer(10);
         list.offer(10);
@@ -96,6 +96,6 @@ public class ArrayQueue<E>{
         list.poll();
         list.poll();
         list.poll();
-        System.out.println(list.Size()+" "+ list.MaxSize());
+        System.out.println(list.Size()+" "+ list.MaxSize());*/
     }
 }
